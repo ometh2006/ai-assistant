@@ -1,5 +1,5 @@
 # 🤖 AI Assistant — Android App
-**Lightweight AI assistant android (Android 6.0+)**
+**Lightweight AI assistant for Huawei Y3 2017 (Android 6.0+)**
 
 ---
 

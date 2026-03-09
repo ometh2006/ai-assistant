@@ -1,0 +1,39 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.aiassistant"
+        minSdkVersion 23          // Android 6.0 (Huawei Y3 2017)
+        targetSdkVersion 28       // Android 9 — safe for older devices
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true    // Shrink APK for low-end device
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    // AndroidX / Support Library (compatible with API 23)
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
+
+    // OkHttp — lightweight HTTP client for Groq API calls
+    implementation 'com.squareup.okhttp3:okhttp:3.12.13'  // 3.x supports Java 7/Android 4+
+
+    // JSON parsing (built into Android, no extra dep needed for org.json)
+}
