@@ -3,8 +3,6 @@ name: Build AI Assistant APK
 on:
   push:
     branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
   workflow_dispatch:
 
 jobs:
@@ -13,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: 📥 Checkout code
         uses: actions/checkout@v4
 
@@ -23,7 +20,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: 📦 Cache Gradle packages
+      - name: 📦 Cache Gradle
         uses: actions/cache@v4
         with:
           path: |
@@ -32,13 +29,7 @@ jobs:
           key: gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: gradle-
 
-      - name: 🔧 Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-
-      - name: 🔧 Generate Gradle Wrapper
-        run: gradle wrapper --gradle-version 7.5
-
-      - name: 🔧 Grant execute permission for gradlew
+      - name: 🔧 Make gradlew executable
         run: chmod +x gradlew
 
       - name: 🔑 Inject API Key
@@ -55,9 +46,3 @@ jobs:
           name: AI-Assistant-Debug-APK
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
-
-      - name: 📊 Show APK info
-        run: |
-          APK=app/build/outputs/apk/debug/app-debug.apk
-          SIZE=$(du -sh $APK | cut -f1)
-          echo "✅ Build successful! APK size: $SIZE"
