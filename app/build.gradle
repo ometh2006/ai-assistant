@@ -1,11 +1,15 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+}
 
 android {
-    compileSdkVersion 33
+    namespace 'com.aiassistant'
+    compileSdk 34
+
     defaultConfig {
         applicationId "com.aiassistant"
-        minSdkVersion 23
-        targetSdkVersion 33
+        minSdk 23
+        targetSdk 34
         versionCode 1
         versionName "1.0"
     }
